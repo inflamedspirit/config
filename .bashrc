@@ -6,6 +6,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+xrdb -override ~/.Xresources
 
 
 #  SETUP CONSTANTS
@@ -153,8 +154,8 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)m
-    PS1="$BPurple\u@\h$Color_Off \a\]"
+xterm*|rxvt*)
+    PS1="$BPurple\u@\h$Color_Off \]"
     ;;
 *)
     ;;
