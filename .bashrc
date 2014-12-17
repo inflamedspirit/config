@@ -8,6 +8,12 @@
 
 xrdb -override ~/.Xresources
 
+# Source global definitions, don't know if I need this, was from shell bashrc
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+
 
 #  SETUP CONSTANTS
 #  Bunch-o-predefined colors.  Makes reading code easier than escape sequences.
