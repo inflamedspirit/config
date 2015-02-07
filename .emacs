@@ -1,10 +1,8 @@
 ;; .emacs
-;; 
+;; Wesley Erickson 
+;;
 ;; Countless snippets from:
 ;; http://pages.sachachua.com/.emacs.d/Sacha.html
-;;
-
-
 
 ;;; uncomment this line to disable loading of "default.el" at startup
 ;; (setq inhibit-default-init t)
@@ -103,7 +101,35 @@
   )
 (global-set-key [f9] 'toggle-inversion)
 
-
-
 ;;Increase font size
 (set-default 'preview-scale-function 1.5)
+
+
+
+;; org publishing settings
+;; to force update of unchanged files delete .org-timestamps
+;;	 :exclude "\\*"
+(require 'org-publish)
+(setq org-publish-project-alist
+      '(
+	("org-notes"
+	 :base-directory "~/org/"
+	 :base-extension "org"
+	 :publishing-directory "~/public_html_test/"
+	 :recursive t
+	 :publishing-function org-publish-org-to-html
+	 :headline-levels 4             ; Just the default for this project.
+	 :auto-preamble t
+	 :include ("~/org/index.org")
+	 )
+	("org-static"
+	 :base-directory "~/org/"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+	 :publishing-directory "~/public_html_test/"
+	 :recursive t
+	 :publishing-function org-publish-attachment
+	 )
+	("org" :components ("org-notes" "org-static"))
+      ))
+
+
