@@ -6,6 +6,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+xrdb -override ~/.Xresources
 
 # Source global definitions, don't know if I need this, was from shell bashrc
 if [ -f /etc/bashrc ]; then
@@ -159,7 +160,7 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)m
+xterm*|rxvt*)
     PS1="$BPurple\u@\h$Color_Off \]"
     ;;
 *)
