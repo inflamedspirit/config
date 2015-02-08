@@ -100,6 +100,7 @@
   (invert-face 'default)
   )
 (global-set-key [f9] 'toggle-inversion)
+(toggle-inversion)
 
 ;;Increase font size
 (set-default 'preview-scale-function 1.5)
@@ -109,22 +110,38 @@
 ;; org publishing settings
 ;; to force update of unchanged files delete .org-timestamps
 ;;	 :exclude "\\*"
-(require 'org-publish)
+;;(require 'org-publish)
+	;; :recursive f
+;;	 :toc f
+;         :style-include-default nil  ;Disable the default css style
+;:org-html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\">"
+;:org-html-head-include-default-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\">"
+;         :auto-postamble nil         ; Disable auto postamble 
+;	 :html-preamble nil
+; 
+;	 :html-head-include-default-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\">"
+;         :export-creator-info nil    ; Disable the inclusion of "Created by Org" in the postamble.
+;         :export-author-info nil     ; Disable the inclusion of "Author: Your Name" in the postamble.
+;         :html-postamble-format "    <p class=\"postamble\">Last Updated %d.</p> " ; your personal postamble	
+;         :org-html-postamble-format "    <p class=\"postamble\">Last Updated %d.</p> " ; your personal postamble	
+
 (setq org-publish-project-alist
+
       '(
 	("org-notes"
 	 :base-directory "~/org/"
 	 :base-extension "org"
 	 :publishing-directory "~/public_html_test/"
-	 :recursive t
-	 :publishing-function org-publish-org-to-html
+	 :publishing-function org-html-publish-to-html
 	 :headline-levels 4             ; Just the default for this project.
-	 :auto-preamble t
-	 :include ("~/org/index.org")
+         :with-toc nil        ; Set this to "t" if you want a table of contents, set to "nil" disables TOC.
+         :section-numbers nil        ; Set this to "t" if you want headings to have numbers.
+	 :html-postamble t
+	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\">"
 	 )
 	("org-static"
 	 :base-directory "~/org/"
-	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|tsv"
 	 :publishing-directory "~/public_html_test/"
 	 :recursive t
 	 :publishing-function org-publish-attachment
@@ -132,4 +149,5 @@
 	("org" :components ("org-notes" "org-static"))
       ))
 
+(setq org-html-postamble-format '(("en" "<p class=\"postamble\">Last Updated: %C</p>")))
 
